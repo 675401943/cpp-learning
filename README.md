@@ -1,12 +1,10 @@
 # cpp_trading
 
-这是一个基于 C++ 的简易交易系统示例，使用 CMake 构建，并支持与行情（MD）和交易（TD）模块交互的策略开发。
-
-这也是我的C++高频开发学习笔记。
+这是Hanxiao Zhu的C++学习进度笔记。
 
 学习思路：
-    1 基础教程：https://www.learncpp.com/
-    2 核心构件：DeepSeek Syllabus
+    1. 新手教程：https://www.learncpp.com/
+    2. 核心构件：DeepSeek Syllabus
         ![Week1](image.png)
         ![Week2](image-1.png)
         ![Week3](image-2.png)
@@ -17,6 +15,12 @@ WSL基础命令
         cd ~/cpp_trading/build
         make
         ./hello_cmake
+    2. Git版本管理-项目地址：https://github.com/675401943/cpp-learning.git
+        git branch                       # 0. 分支查看
+        git status                       # 0. 状态查看
+        git add .                        # 1. 添加所有更改文件（或指定文件）
+        git commit -m "更新说明"          # 2. 提交更改到本地仓库
+        git push origin main             # 3. 推送更改到 GitHub（远程）
     
 
 核心概念

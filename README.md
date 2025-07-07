@@ -3,8 +3,9 @@
 这是Hanxiao Zhu的C++学习进度笔记。
 
 学习思路：
-    1. 新手教程：https://www.learncpp.com/
-    2. 核心构件：DeepSeek Syllabus
+    1. 菜鸟教程：https://www.runoob.com/cplusplus/cpp-tutorial.html
+    2. 进阶教程：https://www.learncpp.com/
+    3. 核心构件：DeepSeek Syllabus
         ![Week1](image.png)
         ![Week2](image-1.png)
         ![Week3](image-2.png)
@@ -15,6 +16,7 @@ WSL基础命令
         cd ~/cpp_trading/build
         make
         ./hello_cmake
+        
     2. Git版本管理-项目地址：https://github.com/675401943/cpp-learning.git
         git branch                       # 0. 分支查看
         git status                       # 0. 状态查看

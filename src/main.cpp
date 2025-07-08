@@ -12,18 +12,33 @@ using namespace std;
 This is a multi-line comment
 */
 
+// #define LENGTH 10   
+// #define WIDTH  5
+// #define NEWLINE '\n'
+
+
 namespace infomation {
     bool boolean_is_me;
     char char_is_me;
-    std::string string_is_me;\
+    wchar_t wchar_is_me; // 宽字符类型，通常用于表示 Unicode 字符
+    char16_t char16_is_me; // 16 位字符类型，通常用于表示 UTF-16 编码的字符
+    char32_t char32_is_me; // 32 位字符类型，通常用于表示 UTF-32 编码的字符
+
+    // std::string 是 C++ 标准库中的字符串类，用于处理字符串
+    // std::wstring 是 C++ 标准库中的宽字符串类，用于处理宽字符字符串
+    std::string string_is_me;
+    std::wstring wstring_is_me; // 宽字符串类型，通常用于表示 Unicode 字符串
+    std::string string_is_me;
 
     int int_is_me;
     float float_is_me;
     double double_is_me;
-    short short_is_me;
-    long long_is_me;
+    short short_is_me; // short：表示变量的范围比 int 更小。short int 可以缩写为 short。
+    long long_is_me; // long：表示变量的范围比 int 更大。long int 可以缩写为 long。
+    // const 定义常量，表示该变量的值不能被修改。
     const int const_int_is_me; // const int is a constant integer
 
+    // unsigned：表示变量不能存储负数。对于整型变量来说，unsigned 可以将变量范围扩大一倍。
     unsigned int unsigned_int_is_me;
     unsigned short unsigned_short_is_me;
     unsigned long long unsigned_long_long_is_me;
@@ -45,7 +60,28 @@ namespace infomation {
         int member_int;
         float member_float;
         char member_char;
+        
     };
+
+// volatile：表示变量的值可能会被外部因素改变，编译器不会对其进行优化。如硬件或其他线程。
+// restrict：表示指针指向的内存区域不会被其他指针访问，编译器可以对其进行优化。
+// 这两个关键字通常用于优化性能，但在现代 C++ 中不常用。
+// volatile 和 restrict 在 C++ 中不是常用的关键字，主要用于 C 语言。
+// mutable：mutable 用于修饰类的成员变量。被 mutable 修饰的成员变量可以被修改，即使它们所在的对象是 const 的。
+// static：static 用于修饰变量或函数。被 static 修饰的变量或函数的作用域仅限于当前文件或类，不能被其他文件或类访问。
+
+class MutableExample {
+public:
+    int get_value() const {
+        return value_; // const 关键字表示该成员函数不会修改对象中的数据成员
+    }
+    void set_value(int value) const {
+        value_ = value; // mutable 关键字允许在 const 成员函数中修改成员变量
+    }
+private:
+    mutable int value_;
+};
+
 
 
     class class_is_me { // 类 可以包含多个不同类型的成员和方法
@@ -77,7 +113,7 @@ namespace infomation {
         VALUE_THREE
     };
 
-//标准库类型
+    // 标准库类型
     std::vector<int> vector_is_me = {1, 2, 3, 4, 5}; // 向量 是一个动态数组，可以自动调整大小
     std::string string_is_me = "Hello, World!"; // 字符串 是一个动态数组，可以自动调整大小std
     std::array<int, 5> array_fixed_size_is_me = {1, 2, 3, 4, 5}; // 固定大小数组 是一个固定大小的数组，大小在编译时确定
@@ -92,6 +128,11 @@ namespace infomation {
 int main() {
     std::cout << "Hello CMake!" << std::endl;
     std::cout << "Hello Cpp!" << std::endl;
+
+
+    const int  LENGTH = 10;
+    const int  WIDTH  = 5;
+    const char NEWLINE = '\n';
 
     
     return 0;

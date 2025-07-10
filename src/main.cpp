@@ -17,6 +17,14 @@ This is a multi-line comment
 // #define NEWLINE '\n'
 
 
+// 逻辑运算符用于对布尔值进行逻辑运算，返回布尔值。
+// 常用的逻辑运算符有：与（&&）、或（||）、非（!）
+// 与运算符（&&）：当且仅当两个操作数都为 true 时，结果为 true。
+// 或运算符（||）：当至少一个操作数为 true 时，结果为 true。
+// 非运算符（!）：对操作数取反，如果操作数为 true，则结果为 false；如果操作数为 false，则结果为 true。
+// a && b
+// a || b
+
 namespace infomation {
     bool boolean_is_me;
     char char_is_me;
@@ -28,7 +36,6 @@ namespace infomation {
     // std::wstring 是 C++ 标准库中的宽字符串类，用于处理宽字符字符串
     std::string string_is_me;
     std::wstring wstring_is_me; // 宽字符串类型，通常用于表示 Unicode 字符串
-    std::string string_is_me;
 
     int int_is_me;
     float float_is_me;
@@ -36,14 +43,15 @@ namespace infomation {
     short short_is_me; // short：表示变量的范围比 int 更小。short int 可以缩写为 short。
     long long_is_me; // long：表示变量的范围比 int 更大。long int 可以缩写为 long。
     // const 定义常量，表示该变量的值不能被修改。
-    const int const_int_is_me; // const int is a constant integer
+    const int const_int_is_me = 3; // const int is a constant integer
 
     // unsigned：表示变量不能存储负数。对于整型变量来说，unsigned 可以将变量范围扩大一倍。
     unsigned int unsigned_int_is_me;
     unsigned short unsigned_short_is_me;
     unsigned long long unsigned_long_long_is_me;
 
-    auto auto_is_me; // auto is a type that is deduced by the compiler
+    char char_is_me2 = 'a'; // char：表示单个字符，通常用于存储 ASCII 字符。
+    auto auto_is_me = char_is_me; // auto is a type that is deduced by the compiler
     decltype(auto_is_me) decltype_auto_is_me; // decltype is a type that is deduced by the compiler
 
     std::initializer_list<int> initializer_list_is_me = {1,2,3}; // initializer_list is a type that is used to initialize a list of values
@@ -69,6 +77,16 @@ namespace infomation {
 // volatile 和 restrict 在 C++ 中不是常用的关键字，主要用于 C 语言。
 // mutable：mutable 用于修饰类的成员变量。被 mutable 修饰的成员变量可以被修改，即使它们所在的对象是 const 的。
 // static：static 用于修饰变量或函数。被 static 修饰的变量或函数的作用域仅限于当前文件或类，不能被其他文件或类访问。
+
+// 存储类
+// auto：auto 是 C++11 引入的关键字，用于自动推导变量的类型。编译器会根据变量的初始值来推导其类型。
+// extern：extern 用于声明变量或函数的外部链接性。它告诉编译器该变量或函数在其他文件中定义，可以在当前文件中使用。
+// static：static 用于声明变量或函数的内部链接性。它告诉编译器该变量或函数只能在当前文件中使用，不能在其他文件中访问。
+// thread_local：thread_local 用于声明线程局部存储变量。每个线程都有自己的副本，线程之间不会共享该变量的值。
+// mutable：mutable 用于修饰类的成员变量。被 mutable 修饰的成员变量可以在 const 成员函数中被修改，即使它们所在的对象是 const 的。
+// thread_local：thread_local 用于声明线程局部存储变量。每个线程都有自己的副本，线程之间不会共享该变量的值。
+// 从 C++ 17 开始，auto 关键字不再是 C++ 存储类说明符
+
 
 class MutableExample {
 public:
@@ -115,7 +133,7 @@ private:
 
     // 标准库类型
     std::vector<int> vector_is_me = {1, 2, 3, 4, 5}; // 向量 是一个动态数组，可以自动调整大小
-    std::string string_is_me = "Hello, World!"; // 字符串 是一个动态数组，可以自动调整大小std
+    std::string string_is_me2 = "Hello, World!"; // 字符串 是一个动态数组，可以自动调整大小std
     std::array<int, 5> array_fixed_size_is_me = {1, 2, 3, 4, 5}; // 固定大小数组 是一个固定大小的数组，大小在编译时确定
 
     std::pair<int, float> pair_is_me = {1, 2.0}; // 对 是一个包含两个值的类型
@@ -133,7 +151,55 @@ int main() {
     const int  LENGTH = 10;
     const int  WIDTH  = 5;
     const char NEWLINE = '\n';
+    cout <<"It is a new line!" << NEWLINE << endl;
 
-    
+    int larger_int = max(LENGTH, WIDTH); // 调用 max 函数
+    cout << "Max value is : " << larger_int << endl; 
+
+
+// Lambda 函数与表达式
+// C++11 提供了对匿名函数的支持,称为 Lambda 函数(也叫 Lambda 表达式)。
+// Lambda 表达式把函数看作对象。Lambda 表达式可以像对象一样使用，
+// 比如可以将它们赋给变量和作为参数传递，还可以像函数一样对其求值。
+// Lambda 表达式本质上与函数声明非常类似。Lambda 表达式具体形式如下:
+// [capture](parameters)->return-type{body}
+    auto lambda_function = [](int a, int b) -> int {
+        return a + b; // Lambda 函数体
+    };
+    cout << "Lambda function result: " << lambda_function(3, 4) << endl;
+
+// Lambda 表达式的捕获列表（Capture List）
+// 捕获列表用于指定 Lambda 表达式可以访问的外部变量。捕获列表位于方括号 [] 中。
+// 捕获列表可以为空，也可以包含一个或多个变量名，或者使用特殊符号来指定捕获方式。
+// 捕获方式有两种：按值捕获和按引用捕获。
+// 按值捕获会复制外部变量的值，而按引用捕获则允许 Lambda 表达式直接访问外部变量的地址。
+// 捕获列表可以为空，也可以包含一个或多个变量名，或者使用特殊符号来指定捕获方式。
+
+// 在Lambda表达式内可以访问当前作用域的变量，这是Lambda表达式的闭包（Closure）行为。 与JavaScript闭包不同，C++变量传递有传值和传引用的区别。可以通过前面的[]来指定：
+// []      // 沒有定义任何变量。使用未定义变量会引发错误。
+// [x, &y] // x以传值方式传入（默认），y以引用方式传入。
+// [&]     // 任何被使用到的外部变量都隐式地以引用方式加以引用。
+// [=]     // 任何被使用到的外部变量都隐式地以传值方式加以引用。
+// [&, x]  // x显式地以传值方式加以引用。其余变量以引用方式加以引用。
+// [=, &z] // z显式地以引用方式加以引用。其余变量以传值方式加以引用。
+
+
+
     return 0;
+}
+
+
+
+
+int max(int num1, int num2) 
+{
+   // 局部变量声明
+   int result;
+ 
+   if (num1 > num2)
+      result = num1;
+   else
+      result = num2;
+ 
+   return result; 
 }

@@ -1,10 +1,16 @@
-#include <iostream>
+// 定义了cin cout cerr clog 等输入输出流对象 
+// 分别对应于标准输入流、标准输出流、非缓冲标准错误流和缓冲标准错误流。
+#include <iostream> 
+
 #include <vector>
 #include <array> // 添加此行以支持 std::array
 #include <map>
 #include <set>
 #include <string>
-using namespace std;
+#include <cstring> //strcpy
+using namespace std; // 可以用cout 代替 std::cout
+
+#include <ctime>
 
 // This is a comment
 // This is a multi-line comment
@@ -64,6 +70,14 @@ namespace infomation {
         return a + b; // 函数体
     };
 
+    // 结构体是 C++ 中的一种用户自定义数据类型，可以包含多个不同类型的成员变量。
+    // 结构体的作用是将相关的数据组合在一起，形成一个新的数据类型。
+    // 结构体可以包含多个不同类型的成员变量，也可以包含成员函数。
+    // 结构体的成员变量可以是基本数据类型、其他结构体、类、联合体等。
+    // 结构体的成员函数可以访问结构体的成员变量，也可以修改它们的值。
+    // 简单数据封装：适合封装多种类型的简单数据，通常用于数据的存储。
+    // 轻量级：相比 class，结构体语法更简洁，适合小型数据对象。
+    // 面向对象支持：支持构造函数、成员函数和访问权限控制，可以实现面向对象的设计
     struct struct_is_me { // 结构体 可以包含多个不同类型的成员
         int member_int;
         float member_float;
@@ -71,34 +85,36 @@ namespace infomation {
         
     };
 
-// volatile：表示变量的值可能会被外部因素改变，编译器不会对其进行优化。如硬件或其他线程。
-// restrict：表示指针指向的内存区域不会被其他指针访问，编译器可以对其进行优化。
-// 这两个关键字通常用于优化性能，但在现代 C++ 中不常用。
-// volatile 和 restrict 在 C++ 中不是常用的关键字，主要用于 C 语言。
-// mutable：mutable 用于修饰类的成员变量。被 mutable 修饰的成员变量可以被修改，即使它们所在的对象是 const 的。
-// static：static 用于修饰变量或函数。被 static 修饰的变量或函数的作用域仅限于当前文件或类，不能被其他文件或类访问。
-
-// 存储类
-// auto：auto 是 C++11 引入的关键字，用于自动推导变量的类型。编译器会根据变量的初始值来推导其类型。
-// extern：extern 用于声明变量或函数的外部链接性。它告诉编译器该变量或函数在其他文件中定义，可以在当前文件中使用。
-// static：static 用于声明变量或函数的内部链接性。它告诉编译器该变量或函数只能在当前文件中使用，不能在其他文件中访问。
-// thread_local：thread_local 用于声明线程局部存储变量。每个线程都有自己的副本，线程之间不会共享该变量的值。
-// mutable：mutable 用于修饰类的成员变量。被 mutable 修饰的成员变量可以在 const 成员函数中被修改，即使它们所在的对象是 const 的。
-// thread_local：thread_local 用于声明线程局部存储变量。每个线程都有自己的副本，线程之间不会共享该变量的值。
-// 从 C++ 17 开始，auto 关键字不再是 C++ 存储类说明符
 
 
-class MutableExample {
-public:
-    int get_value() const {
-        return value_; // const 关键字表示该成员函数不会修改对象中的数据成员
-    }
-    void set_value(int value) const {
-        value_ = value; // mutable 关键字允许在 const 成员函数中修改成员变量
-    }
-private:
-    mutable int value_;
-};
+    // volatile：表示变量的值可能会被外部因素改变，编译器不会对其进行优化。如硬件或其他线程。
+    // restrict：表示指针指向的内存区域不会被其他指针访问，编译器可以对其进行优化。
+    // 这两个关键字通常用于优化性能，但在现代 C++ 中不常用。
+    // volatile 和 restrict 在 C++ 中不是常用的关键字，主要用于 C 语言。
+    // mutable：mutable 用于修饰类的成员变量。被 mutable 修饰的成员变量可以被修改，即使它们所在的对象是 const 的。
+    // static：static 用于修饰变量或函数。被 static 修饰的变量或函数的作用域仅限于当前文件或类，不能被其他文件或类访问。
+
+    // 存储类
+    // auto：auto 是 C++11 引入的关键字，用于自动推导变量的类型。编译器会根据变量的初始值来推导其类型。
+    // extern：extern 用于声明变量或函数的外部链接性。它告诉编译器该变量或函数在其他文件中定义，可以在当前文件中使用。
+    // static：static 用于声明变量或函数的内部链接性。它告诉编译器该变量或函数只能在当前文件中使用，不能在其他文件中访问。
+    // thread_local：thread_local 用于声明线程局部存储变量。每个线程都有自己的副本，线程之间不会共享该变量的值。
+    // mutable：mutable 用于修饰类的成员变量。被 mutable 修饰的成员变量可以在 const 成员函数中被修改，即使它们所在的对象是 const 的。
+    // thread_local：thread_local 用于声明线程局部存储变量。每个线程都有自己的副本，线程之间不会共享该变量的值。
+    // 从 C++ 17 开始，auto 关键字不再是 C++ 存储类说明符
+
+
+    class MutableExample {
+    public:
+        int get_value() const {
+            return value_; // const 关键字表示该成员函数不会修改对象中的数据成员
+        }
+        void set_value(int value) const {
+            value_ = value; // mutable 关键字允许在 const 成员函数中修改成员变量
+        }
+    private:
+        mutable int value_;
+    };
 
 
 
@@ -142,7 +158,17 @@ private:
 
 }
 
-    
+
+// 声明一个结构体类型 Books 
+struct Books
+{
+char  title[50];
+char  author[50];
+char  subject[100];
+int   book_id;
+};
+
+void printBook( struct Books book );   
 int main() {
     std::cout << "Hello CMake!" << std::endl;
     std::cout << "Hello Cpp!" << std::endl;
@@ -184,11 +210,60 @@ int main() {
 // [=, &z] // z显式地以引用方式加以引用。其余变量以传值方式加以引用。
 
 
+    int int_var = 10;
+    int *pointer_var = &int_var;
+
+    cout << "\nValue of int_var: ";
+    cout << int_var << endl;
+
+    // 输出在指针变量中存储的地址
+    cout << "Address of int_var: ";
+    cout << pointer_var << endl;
+
+    // 访问指针中地址的值
+    cout << "Value at address stored in pointer_var: ";
+    cout << *pointer_var << endl; 
+
+
+    // 通过指针修改 int_var 的值
+    *pointer_var = 20;
+    cout << "New value of int_var: ";
+    cout << int_var << endl;
+
+    // 基于当前系统的当前日期/时间
+    time_t time_now = time(0);
+    // 把 now 转换为字符串形式
+    char* dt = ctime(&time_now);
+    cout << "\n本地日期和时间：" << dt << endl;
+
+
+    Books Book1;        // 定义结构体类型 Books 的变量 Book1
+    
+    // Book1 详述
+    strcpy( Book1.title, "C++ 教程");
+    strcpy( Book1.author, "Runoob"); 
+    strcpy( Book1.subject, "编程语言");
+    Book1.book_id = 12345;
+    
+    // 输出 Book1 信息
+    cout << "第一本书标题 : " << Book1.title <<endl;
+    cout << "第一本书作者 : " << Book1.author <<endl;
+    cout << "第一本书类目 : " << Book1.subject <<endl;
+    cout << "第一本书 ID : " << Book1.book_id <<endl;
+
+    // 输出 Book1 信息2
+    printBook( Book1 );
 
     return 0;
 }
 
-
+void printBook( struct Books book )
+{
+   cout << "\n书标题 : " << book.title <<endl;
+   cout << "书作者 : " << book.author <<endl;
+   cout << "书类目 : " << book.subject <<endl;
+   cout << "书 ID : " << book.book_id <<endl;
+}
 
 
 int max(int num1, int num2) 

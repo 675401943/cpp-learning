@@ -254,6 +254,98 @@ int main() {
     // 输出 Book1 信息2
     printBook( Book1 );
 
+
+
+
+
+
+    // Vector 是 C++ 标准库中的一个动态数组类，可以存储任意类型的元素，并且可以自动调整大小。
+    // Vector 的作用是提供一个动态数组的实现，可以方便地存储和访问
+    // 元素。Vector 可以自动调整大小，支持随机访问和迭代器操作。
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+    cout << "\nVector elements: ";
+    for (const auto& elem : vec) {
+        cout << elem << " ";
+    }
+    cout << endl;
+
+    vector<int> vector_default_five(5);
+    // auto elem 会"拷贝"容器中的每个元素
+    // auto& elem 会"引用"容器中的每个元素
+    // 对于 int 这种小型数据影响不大，但对大型对象如 std::string 或自定义类会显著降低性能
+    cout << "Default vector of size 5: ";
+    for (const auto& elem : vector_default_five) { // const 确保循环内不会意外修改元素（明确表达“只读”意图）
+        cout << elem << " ";
+    }
+    cout << endl;
+
+    // 使用 vector 的默认值初始化
+    // 这里创建一个大小为 5 的 vector，所有元素都初始化为 10
+    vector<int> vector_default_five_10(5, 10);
+
+    vector_default_five_10.push_back(20); // 添加一个元素 20
+
+    int x_first = vector_default_five_10[0]; // 访问第一个元素
+    int y_first = vector_default_five_10.at(0); // 使用 at() 方法访问第一个元素
+    cout << "Element: " << x_first << y_first << endl;
+
+    cout << "Default vector of size 5 for 10s: ";
+    for (const auto& elem : vector_default_five_10) {
+        cout << elem << " ";
+    }
+    cout << endl;
+
+
+    int int_size = vector_default_five_10.size(); // 获取 vector 的大小
+    cout << "Size of vector_default_five_10: " << int_size << endl;
+
+    // 迭代访问-范围循环(底层仍是迭代器) 拷贝 复制内存可修改
+    for (int element : vector_default_five_10) {
+        cout << "Element: " << element << endl;
+    };
+
+    // 迭代访问-迭代器遍历
+    // 迭代器是 C++ 标准库中用于遍历容器的对象，可以像指针一样使用。
+    // 迭代器可以用于访问容器中的元素，并且可以进行插入、删除等操作。
+    // 迭代器的作用是提供一种统一的方式来遍历容器中的元素。
+    // myVector.begin()：返回指向容器第一个元素的迭代器（类似于指针）。
+    for (auto it = vector_default_five_10.begin(); it != vector_default_five_10.end(); ++it) {
+        cout << "Element: " << *it << endl; // 使用 *it 解引用迭代器获取元素值
+    }
+
+    // vector_default_five_10.begin(); // 获取指向第一个元素的迭代器
+    // vector_default_five_10.end(); // 获取指向最后一个元素之后的迭代器
+    cout << "vector_default_five_10's size: " << vector_default_five_10.size() << endl; // 获取 vector 的大小
+    cout << "vector_default_five_10's capacity: " << vector_default_five_10.capacity() << endl; // 获取 vector 的容量
+
+    // vector_default_five_10.front(); // 获取第一个元素
+    // vector_default_five_10.back(); // 获取最后一个元素
+    cout << "vector_default_five_10's front: " << vector_default_five_10.front() << endl; // 获取第一个元素 的值
+    cout << "vector_default_five_10's begin: " << *vector_default_five_10.begin() << endl; // 获取第一个元素 通过解引用迭代器获得值
+    // 迭代器的本质
+    // 迭代器通常是指针的包装，直接指向容器中的元素。
+    // 迭代器可以通过解引用操作符（*）来访问元素的值。
+    // 迭代器可以通过自增（++）或自减（--）操作符来移动到下一个或上一个元素。
+    // 避免手动计算偏移量（如 ptr + i），减少指针越界错误 // 也可以用at 但性能略低于直接访问如vec[i]（因边界检查）
+
+    // 指针算术：最快，但高风险（适合性能关键且已严格验证的场景）。
+    // 迭代器/安全方法：稍慢（因可能的边界检查），但99%的场景足够高效。
+    // 在现代C++中，除非是底层代码（如自定义数据结构或高频交易系统），否则永远不需要手动计算指针偏移。迭代器和标准库已为你安全且高效地处理了边界问题。
+
+
+    vector_default_five_10.erase(vector_default_five_10.begin() + 1); // 删除第二个元素
+
+    vector_default_five_10.clear(); // 清空 vector 保留容量capacity 避免重复分配内存
+    vector_default_five_10 = vector<int>(); // 立即释放内存减少占用 保证确定性状态如确保迭代器完全失效
+
+
+    
+
+
+
+
+
+
     return 0;
 }
 

@@ -339,10 +339,55 @@ int main() {
     vector_default_five_10 = vector<int>(); // 立即释放内存减少占用 保证确定性状态如确保迭代器完全失效
 
 
-    
+    // C++ 数据结构 数组、结构体、类，也有STL容器如vector、list、map和unordered_map等。
 
+    // 1. 数组（Array）：C++ 中的数组是一个固定大小的连续内存块，可以存储相同类型的元素。
+    // 数组的大小在编译时确定，不能动态调整。
+    // 直接访问元素，时间复杂度为O（1）。
+    int arr[5] = {1, 2, 3, 4, 5}; // 定义一个大小为 5 的整数数组
+    cout << "Array elements: " << arr[0];
 
+    // 2. 结构体（Struct）：C++ 中的结构体是一种用户定义的数据类型，可以包含多个不同类型的成员变量。
+    // 结构体的大小在编译时确定，不能动态调整。
+    // 结构体可以包含基本数据类型、其他结构体、类、联合体等。
+    struct Person {
+        string name;
+        int age;
+        
+    };
+    Person person_A = {"Alice", 30}; // 定义一个 Person 结构体变量
+    cout << "\nPerson name: " << person_A.name << ", age: " << person_A.age << endl;
 
+    // 3. 类（Class）：C++ 中的类是一种用户定义的数据类型，可以包含多个不同类型的成员变量、成员函数、构造函数和析构函数。
+    // 类的大小在编译时确定，不能动态调整。
+    // 类可以包含基本数据类型、其他类、结构体、联合体等。
+    // 与struct不同，类默认成员是私有的（private），而结构体默认成员是公有的（public）。
+    // 而且，类可以实现封装、继承和多态等面向对象的特性。
+    class Class_Person {
+        private:
+            string name;
+            int age;
+        public:
+            Class_Person(string n, int a) : name(n), age(a) {} // 构造函数
+            void printInfo() const { // 成员函数
+                cout << "Name: " << name << ", Age: " << age << endl;
+            }
+    };
+    Class_Person person_B("Bob", 25); // 定义一个 Person 类对象
+    person_B.printInfo(); // 调用成员函数打印信息
+
+    // 4. 链表 Linked List：C++ 中的链表是一种动态数据结构，由一系列节点组成，每个节点包含数据和指向下一个节点的指针。
+    // 链表的大小可以动态调整，支持插入和删除操作。
+    // 链表线性查找的时间复杂度为O（n），因为需要遍历链表找到插入或删除位置。
+    // 链表头部与尾部插入和删除时间复杂度O（1）
+    struct Node {
+        int int_data;
+        Node* next; // 指向下一个节点的指针
+    };
+    Node* ptr_head = nullptr; // 链表头指针
+    Node* newNode = new Node{10, nullptr}; // 创建一个新节点
+    ptr_head = newNode; // 将新节点设置为链表头
+    cout << "Linked List head data: " << ptr_head->int_data << endl; //
 
 
 

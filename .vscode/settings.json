@@ -3,6 +3,9 @@
   "cmake.buildDirectory": "${workspaceFolder}/build",
   "cmake.generator": "Unix Makefiles",
   "files.associations": {
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "array": "cpp",
+    "string": "cpp",
+    "string_view": "cpp"
   }
 }

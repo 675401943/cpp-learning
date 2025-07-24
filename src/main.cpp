@@ -4,6 +4,12 @@
 
 #include <vector>
 #include <array> // 添加此行以支持 std::array
+#include <stack> // 添加此行以支持 std::stack
+#include <queue> // 添加此行以支持 std::queue
+#include <deque> // 添加此行以支持 std::deque
+#include <unordered_map> // 添加此行以支持 std::unordered_map
+
+
 #include <map>
 #include <set>
 #include <string>
@@ -388,6 +394,64 @@ int main() {
     Node* newNode = new Node{10, nullptr}; // 创建一个新节点
     ptr_head = newNode; // 将新节点设置为链表头
     cout << "Linked List head data: " << ptr_head->int_data << endl; //
+
+    // 5. 栈 Stack：C++ 中的栈是一种后进先出（LIFO）的数据结构，支持在顶部插入和删除元素。
+    // 栈的大小可以动态调整，支持插入和删除操作。
+    // 栈的插入和删除操作时间复杂度为O（1），因为只需要操作顶部元素。
+    // 栈可以使用 std::stack 容器实现。
+    std::stack<int> stack_is_me; // 定义一个整数栈
+    stack_is_me.push(1); // 入栈
+    stack_is_me.push(2); // 入栈
+    stack_is_me.push(3); // 入栈
+    cout << "\nStack top element: " << stack_is_me.top() << endl; //
+    stack_is_me.pop(); // 出栈
+    cout << "Stack top element after pop: " << stack_is_me.top() << endl;
+
+    // 6. 队列 Queue：C++ 中的队列是一种先进先出（FIFO）的数据结构，支持在尾部插入和在头部删除元素。
+    // 队列的大小可以动态调整，支持插入和删除操作。
+    // 队列的插入和删除操作时间复杂度为O（1），因为只需要操作头部和尾部元素。
+    // 队列可以使用 std::queue 容器实现。
+    std::queue<int> queue_is_me; // 定义一个整数队列
+    queue_is_me.push(1); // 入队
+    queue_is_me.push(2); // 入队
+    queue_is_me.push(3); // 入队
+    cout << "\nQueue front element: " << queue_is_me.front() << endl; //
+    queue_is_me.pop(); // 出队
+    cout << "Queue front element after pop: " << queue_is_me.front() << endl;
+
+    // 7. 双端队列 Deque：C++ 中的双端队列是一种可以在两端插入和删除元素的数据结构。
+    // 双端队列的大小可以动态调整，支持在两端插入和删除操作。
+    // 双端队列的插入和删除操作时间复杂度为O（1），因为可以在两端操作元素。
+    // 双端队列可以使用 std::deque 容器实现。
+    std::deque<int> deque_is_me; // 定义一个整数双端队列
+    deque_is_me.push_back(1); // 在尾部插入
+    deque_is_me.push_front(2); // 在头部插入
+    deque_is_me.push_back(3); // 在尾部插入
+    cout << "\nDeque front element: " << deque_is_me.front() << endl; //
+    cout << "Deque back element: " << deque_is_me.back() << endl; //
+    deque_is_me.pop_front(); // 在头部删除
+    cout << "Deque front element after pop: " << deque_is_me.front() << endl; //
+    deque_is_me.pop_back(); // 在尾部删除
+    cout << "Deque back element after pop: " << deque_is_me.back() << endl;
+
+    // 8. Hash 表（Hash Table）：C++ 中的哈希表是一种基于哈希函数的数据结构，可以快速查找、插入和删除元素。
+    // 哈希表的大小可以动态调整，支持插入和删除操作。
+    // 哈希表的查找、插入和删除操作平均时间复杂度为O（1），但在最坏情况下可能退化为O（n）。
+    // 哈希表可以使用 std::unordered_map 容器实现。
+    std::unordered_map<std::string, int> hash_map_is_me; // 定义一个整数到字符串的哈希表
+    hash_map_is_me["one"] = 1; // 插入键值对
+    hash_map_is_me["two"] = 2; // 插入键值对
+    hash_map_is_me["three"] = 3; // 插入键值对
+    cout << "\nHash Map element for 'two': " << hash_map_is_me["two"] << endl; // 查找键为 "two" 的元素
+    
+    hash_map_is_me.erase("two"); // 删除键为 "two" 的元素
+    cout << "Hash Map element for 'two' after erase: ";
+    if (hash_map_is_me.find("two") == hash_map_is_me.end()) {
+        cout << "not found" << endl; // 查找键为 "two" 的元素，未找到
+    } else {
+        cout << hash_map_is_me["two"] << endl; // 查找键为 "two" 的元素，找到
+    }
+
 
 
 

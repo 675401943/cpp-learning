@@ -471,8 +471,8 @@ int main() {
     // 元素有序，适合按顺序处理数据的场景
     // 操作效率比unordered_map略低
     map<string, int> map_is_me; // 定义一个整数到字符串的映射
-    map_is_me['apple'] = 10;
-    cout << "\nMap element for 'apple': " << map_is_me['apple'] << endl; // 查找键为 "apple" 的元素
+    map_is_me["apple"] = 10; // 双引号是string类型
+    cout << "\nMap element for 'apple': " << map_is_me["apple"] << endl; // 查找键为 "apple" 的元素
 
     // 10. 集合 Set：C++ 中的集合是一种有序的唯一元素容器，底层实现是红黑树。与unordered_set不同，它保证建的顺序。
     // 查找、插入和删除的时间复杂度为O（logn），因为需要维护红黑树的平衡。
@@ -495,7 +495,7 @@ int main() {
     cout << endl;
 
     // 解引用
-    cout << *set_is_me.begin() << endl; // 输出集合中的第一个元素
+    cout << "first element in *set_is_me: " << *set_is_me.begin() << endl; // 输出集合中的第一个元素
 
     // 11. Vector（动态数组）：C++ 中的向量是一种动态数组，可以存储任意类型的元素，并且可以自动调整大小，支持随机访问。
     // 支持随机访问，时间复杂度为O（1）。
@@ -514,7 +514,7 @@ int main() {
 
 
 
-    // C++类&对象
+    // C++ 类&对象
     // C++ 中的类是面向对象编程的核心概念，用于封装数据和行为。类是C++的核心特性，通常被称为用户定义的类型。
     // 访问修饰符是private/public/protected，控制成员的访问权限。
 
@@ -526,6 +526,99 @@ int main() {
     // this 指针 每一个对象都有一个特殊的this指针，指向当前对象的地址。this 指针可以在类的成员函数中使用，用于访问当前对象的成员变量和成员函数。
     // 指向类的指针 指向类的指针方式如同指向结构的指针。实际上，类可以看成是一个带有函数的结构。
     // 类的静态成员 类的数据成员和函数成员都可以被声明为静态的。
+
+    // C++ 继承
+    // 依据另一个类来定义一个类，达到重用代码功能和提高执行效率的目的，不需要重新编写新的数据成员和成员函数。
+
+    // access-specifier是public protected private其中一个 如果未使用默认private
+    class Class_Base
+    {
+        public: 
+            void display() {
+                cout << "Class_Base class display function." << endl;
+            }
+    };
+    class Class_Derived : public Class_Base 
+    { // 继承 Class_Base 类 
+        public:
+            void show() {
+                cout << "Class_Derived class show function." << endl;
+            }
+    };
+
+    // derived类可以访问base类的所有public和protected成员，但不能访问private成员。
+    // 因此base类成员如果不想被derived类的成员函数访问，可以将其声明为private。
+
+    // 访问         public  protected  private
+    // 同一个类      yes     yes         yes 
+    // base         yes     yes         no
+    // derived      yes     yes         no
+
+
+    // 我们几乎不使用 protected 或 private 继承，通常使用 public 继承。当使用不同类型的继承时，遵循以下几个规则：
+
+    // 公有继承（public）：  
+            // 当一个类派生自公有基类时，基类的公有成员也是派生类的公有成员，
+            // 基类的保护成员也是派生类的保护成员，基类的私有成员不能直接被派生类访问，但是可以通过调用基类的公有和保护成员来访问。
+
+    // 保护继承（protected）：
+            // 当一个类派生自保护基类时，基类的公有和保护成员将成为派生类的保护成员。
+
+    // 私有继承（private）：
+            // 当一个类派生自私有基类时，基类的公有和保护成员将成为派生类的私有成员。
+
+
+    // 多继承 即一个子类可以有多个父类，它继承了多个父类的特性。
+
+    class class_Shape
+    {
+        protected:
+            int int_width;
+            int int_height;
+        public:
+            void setWidth(int w) 
+            {
+                int_width = w;
+            }
+            void setHeight(int h) 
+            {
+                int_height = h;
+            }
+        
+    };
+
+    class class_PaintCost
+    {
+        public:
+            int getCost(int area) 
+            {
+                return area * 70; // 假设每平方米的油漆成本为 70
+            }
+    };
+
+    class class_Rectangle : public class_Shape, public class_PaintCost 
+    {
+        public:
+            int getArea() 
+            {
+                return int_width * int_height; // 计算矩形面积
+            }
+    };
+
+
+    class_Rectangle Rect;
+    int area;
+ 
+    Rect.setWidth(5);
+    Rect.setHeight(7);
+ 
+    area = Rect.getArea();
+   
+    // 输出对象的面积
+    cout << "Total area: " << Rect.getArea() << endl;
+ 
+    // 输出总花费
+    cout << "Total paint cost: $" << Rect.getCost(area) << endl;
 
 
 
@@ -541,6 +634,9 @@ void printBook( struct Books book )
    cout << "书类目 : " << book.subject <<endl;
    cout << "书 ID : " << book.book_id <<endl;
 }
+
+
+
 
 
 int max(int num1, int num2) 

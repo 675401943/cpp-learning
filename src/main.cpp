@@ -653,6 +653,28 @@ int main() {
     // 在基类中声明一个函数为虚函数，使用关键字virtual。
     // 派生类可以重写（override）这个虚函数。
     // 调用虚函数时，会根据对象的实际类型来决定调用哪个版本的函数。
+    // 虚函数允许子类重写它，从而在运行时通过基类指针或引用调用子类的重写版本，实现动态绑定。
+    // 我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为动态链接，或后期绑定。
+
+    class Animal 
+    {
+        public:
+            virtual void sound() // 声明虚函数
+            {
+                cout << "Animal makes a sound." << endl; // 基类的实现
+            }
+    };
+    class Dog : public Animal 
+    {
+        public:
+            void sound() override // 重写虚函数
+            {
+                cout << "Dog barks." << endl; // 派生类的实现
+            }
+    };
+    Animal *animal = new Dog(); // 通过 Animal* 指针 animal 调用 sound() 时，程序会根据实际对象类型（Dog）来选择调用 Dog::sound()。
+    animal->sound();  // 输出: Dog barks
+    delete animal;
 
     // 纯虚函数 Pure Virtual Function
     // 一个包含纯虚函数的类被称为抽象类（Abstract Class），它不能被直接实例化。
@@ -672,6 +694,10 @@ int main() {
     // 只有通过基类的指针或引用调用虚函数时，才会发生多态。
     // 如果直接使用派生类的对象调用函数，那么调用的是派生类中的版本，而不是基类中的版本。
     // 多态性需要运行时类型信息（RTTI），这可能会增加程序的开销。
+
+    // 
+
+
 
 
 

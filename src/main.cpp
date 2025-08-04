@@ -663,6 +663,8 @@ int main() {
             {
                 cout << "Animal makes a sound." << endl; // 基类的实现
             }
+
+            virtual ~Animal() = default; // 添加虚析构函数
     };
     class Dog : public Animal 
     {
@@ -671,6 +673,8 @@ int main() {
             {
                 cout << "Dog barks." << endl; // 派生类的实现
             }
+
+            ~Dog() override = default; // 可以显式地重写析构函数（可选）
     };
     Animal *animal = new Dog(); // 通过 Animal* 指针 animal 调用 sound() 时，程序会根据实际对象类型（Dog）来选择调用 Dog::sound()。
     animal->sound();  // 输出: Dog barks
@@ -679,7 +683,33 @@ int main() {
     // 纯虚函数 Pure Virtual Function
     // 一个包含纯虚函数的类被称为抽象类（Abstract Class），它不能被直接实例化。
     // 纯虚函数没有函数体，声明时使用= 0。
-    // 它强制派生类提供具体的实现。
+    // 它强制派生类提供具体的实现。定义接口。
+
+    class Shape 
+    {
+        public:
+            virtual int area() = 0;  // 纯虚函数，强制子类实现此方法
+
+            virtual ~Shape() = default; // 添加虚析构函数
+    };
+ 
+    class Rectangle : public Shape 
+    {
+        private:
+            int width, height;
+        public:
+            Rectangle(int w, int h) : width(w), height(h) { }
+        
+            int area() override {  // 实现纯虚函数
+                return width * height;
+            }
+
+            ~Rectangle() override = default; // 可以显式地重写析构函数（可选）
+    };
+
+    Shape *shape = new Rectangle(10, 5);
+    cout << "Rectangle Area: " << shape->area() << endl;  // 输出: Rectangle Area: 50
+    delete shape;
 
     // 多态的实现机制
     // 虚函数表 V-Table: C++运行时使用虚函数表来实现多态。每个包含虚函数的类都有一个虚函数表，表中存储了指向类中所有虚函数的指针。
@@ -695,8 +725,86 @@ int main() {
     // 如果直接使用派生类的对象调用函数，那么调用的是派生类中的版本，而不是基类中的版本。
     // 多态性需要运行时类型信息（RTTI），这可能会增加程序的开销。
 
-    // 
+    // 数据封装
+    class Adder
+    {
+        public:
+            Adder(int i = 0) : total(i) {} // 构造函数，初始化 total
+            // 对外的接口1
+            void addNum(int number) 
+            {
+                total += number; // 添加数字到 total    
+            }
+            // 对外的接口2
+            int getTotal() 
+            {
+                return total; // 返回 total 的值
+            }
 
+        private:
+            // 对外隐藏的数据
+            int total; // 私有成员变量，存储总和    
+
+    };
+
+    Adder a;
+    a.addNum(10); // 调用 addNum 方法添加数字
+    a.addNum(20); // 再添加一个数字 
+    cout << "Total: " << a.getTotal() << endl; // 调用 getTotal 方法获取总和
+
+    
+    // C++ 接口 （抽象类）
+    // C++ 中的接口通常是通过抽象类实现的。抽象类是包含至少一个纯虚函数的类。
+    // 接口定义了一组方法，但不提供具体实现。派生类必须实现这些方法。
+    // 接口可以用于定义一组相关的功能，允许不同的类实现这些功能。
+    // 接口可以通过继承来实现，派生类必须实现所有的纯虚函数。
+    class Interface_Shape
+    {
+        public:
+            virtual int getArea() = 0; // 纯虚函数，定义接口
+            virtual ~Interface_Shape() = default; // 添加虚析构函数
+
+            void setWidth(int w) 
+            {
+                width = w; // 设置宽度
+            }
+            void setHeight(int h) 
+            {
+                height = h; // 设置高度
+            }
+
+        protected:
+            int width; // 保护成员变量，派生类可以访问
+            int height; // 保护成员变量，派生类可以访问
+    };
+
+    // 派生类实现接口
+    class Rectangle_with_interface : public Interface_Shape
+    {
+        public:
+            int getArea() 
+            {
+                return (width * height); // 计算矩形面积
+            }
+    };
+    class Triangle_with_interface : public Interface_Shape
+    {
+        public:
+            int getArea()  
+            {
+                return (0.5 * width * height); // 计算三角形面积
+            }
+    };
+
+    Rectangle_with_interface rect;
+    rect.setWidth(5); // 设置矩形宽度
+    rect.setHeight(10); // 设置矩形高度
+    cout << "Rectangle Area: " << rect.getArea() << endl; // 输出矩形面积
+
+    Triangle_with_interface tri;
+    tri.setWidth(5); // 设置三角形宽度 
+    tri.setHeight(10); // 设置三角形高度
+    cout << "Triangle Area: " << tri.getArea() << endl; // 输出三角形面积
 
 
 
